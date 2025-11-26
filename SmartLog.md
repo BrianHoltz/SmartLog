@@ -1,6 +1,8 @@
-# Aictually - Silent AI Conversation Companion
+# SmartLog
 
-## 1. Overview
+The life log that talks back.
+
+## Overview
 A passive, mostly-silent AI that:
 - Continuously listens to conversation audio.
 - Transcribes audio locally in rolling chunks.
@@ -12,51 +14,28 @@ A passive, mostly-silent AI that:
   - Includes the summary of the current (and if available) previous hour(s).
   - Generates a concise, relevant response via LLM.
 - AI remains otherwise silent and does not speak without explicit request.
-- 
 
-## Candidate Names
-- SmartLog
-- Aictually
-- Ghostwise
-- LogSmart
-- Logia
-- LittleBrother
-- SilentPartner
-- Wisper
-- Refairee
-- Replaygeist
+## Core Components
 
-### Themes
-
-- Silent/Passive AI
-- Eavesdropper/Spy (lovable characters)
-- Friendly Smart Ghost
-- Knowledge Sources (Google, Wikipedia, etc.)
-- Oracle/Sage/Esoteric Wisdom
-- Referee
-- Replay/Recap
-
-## 2. Core Components
-
-### 2.1 Audio Capture
+### Audio Capture
 - Always-on microphone via background audio mode.
 - Optional **VAD (Voice Activity Detection)** to reduce processing cost.
 - Audio stored in a **ring buffer** (e.g., keeping last 1–5 minutes of raw audio).
 
-### 2.2 Speech-to-Text (STT)
+### Speech-to-Text (STT)
 - Runs every 5–30 seconds on-device for privacy and cost savings.
 - Options:
   - **Whisper tiny** (quantized)
   - Platform-native STT (iOS / Android)
 - Produces timestamped transcripts and chunk metadata.
 
-### 2.3 Transcript Management
+### Transcript Management
 - Stores **last N minutes** of text (rolling window).
 - Maintains optional **longer-term summary**:
   - Updated every 1–3 minutes.
   - Helps maintain context without large token usage.
 
-### 2.4 Trigger System
+### Trigger System
 Two trigger types:
 1. **Button press** (hardware or on-screen)
 2. **Wake phrase** (keyword spotting):
@@ -68,7 +47,7 @@ Trigger event causes:
 - Pulling summary state.
 - Sending to LLM with a **context-weighted prompt**.
 
-### 2.5 LLM Processing
+### LLM Processing
 Prompt structure example:
 
 ```
@@ -92,11 +71,11 @@ Possible response modes (optional):
 - Devil’s advocate
 - Fact checking
 
-### 2.6 Text-to-Speech (Optional)
+### Text-to-Speech (Optional)
 - Only triggered after user explicitly requests AI output.
 - Keeps the system “mostly silent.”
 
-### 2.7 Privacy & Consent
+### Privacy & Consent
 - Persistent indicator (e.g., “Listening”)
 - Ability to pause anytime
 - Configurable:
@@ -106,7 +85,7 @@ Possible response modes (optional):
 
 ---
 
-## 3. Technical Feasibility & Tradeoffs
+## Technical Feasibility & Tradeoffs
 
 ### Battery
 - VAD + chunked STT helps significantly.
@@ -121,7 +100,7 @@ Possible response modes (optional):
   - No need for live LLM calls until triggered.
   - No forced session expiration from LLM provider.
 
-## 4. High-Level Architecture
+## High-Level Architecture
 
 ```
 AudioCaptureService
@@ -147,7 +126,7 @@ LLMClient
 Optional: TTS output
 ```
 
-## 5. MVP Scope
+## MVP Scope
 
 ### Phase 1 — Basic
 - Audio capture + rolling transcript
@@ -164,10 +143,56 @@ Optional: TTS output
 - Optional TTS
 - Battery optimization + user settings
 
-## 6. Summary
+## Prototype Plan: STT Evaluation
+
+To de-risk the project and make key technical decisions, the first step is to build a small prototype application.
+
+### Goal
+The primary goal of this prototype is to assess the performance of on-device Speech-to-Text (STT) for continuous speech monitoring. Key metrics to evaluate are:
+- Transcription accuracy in conversational settings.
+- Latency (time from speech to text).
+- Resource consumption (CPU, battery, memory).
+
+### Key Decisions to be Answered by the Prototype
+
+This prototype will help us make the following high-level decisions:
+
+1.  **STT Engine Selection:** This is the most critical fork-in-the-road decision. The prototype should allow for testing and comparing at least two main options:
+    *   **Platform-Native STT:** Using Android's built-in `SpeechRecognizer`. This provides a baseline for performance and ease of integration.
+    *   **Third-party On-device Model:** Integrating a library like `Whisper.cpp`. This offers more control and potentially better performance/privacy, but at the cost of integration complexity and binary size.
+
+2.  **Audio Capture Strategy:**
+    *   **Continuous vs. VAD-based:** The prototype should test both continuously transcribing audio in chunks and using a Voice Activity Detector (VAD) to only transcribe when speech is present. This will allow us to measure the battery life savings from VAD against the complexity it adds.
+
+3.  **Background Processing Architecture:**
+    *   The prototype will force us to choose and validate a robust architecture for background audio processing using a Foreground Service, ensuring the app is reliable and not prematurely killed by the Android OS.
+
+## Summary
 This design:
 - Completely prevents unwanted AI interruptions
 - Provides long-running, continuous awareness
 - Is feasible with today’s mobile hardware
 - Offers customizable levels of intelligence and privacy
 - Achieves your goal: a “mostly silent AI companion” that speaks **only when asked**
+
+## Candidate Names
+- SmartLog
+- Aictually
+- Ghostwise
+- LogSmart
+- Logia
+- LittleBrother
+- SilentPartner
+- Wisper
+- Refairee
+- Replaygeist
+
+### Themes
+
+- Silent/Passive AI
+- Eavesdropper/Spy (lovable characters)
+- Friendly Smart Ghost
+- Knowledge Sources (Google, Wikipedia, etc.)
+- Oracle/Sage/Esoteric Wisdom
+- Referee
+- Replay/Recap
