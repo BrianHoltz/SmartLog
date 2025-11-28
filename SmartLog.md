@@ -15,6 +15,25 @@ A passive, mostly-silent AI that:
   - Generates a concise, relevant response via LLM.
 - AI remains otherwise silent and does not speak without explicit request.
 
+## Actions
+
+- Answer latest question(s)
+- Fact-check latest claim(s)
+- Suggest relevant references
+- Mediate disagreement
+- Steelman each side
+- Suggest common ground
+- Suggest compromise
+- Suggest solutions
+- Suggest next steps
+- Summarize conversation
+- List action items
+- Show transcript
+- Judge/audit/referee transcript
+- Join conversation as referee
+- Join conversation on my side
+- Join conversation on right side
+
 ## Core Components
 
 ### Audio Capture
