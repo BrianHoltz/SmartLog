@@ -17,22 +17,29 @@ A passive, mostly-silent AI that:
 
 ## Actions
 
+### Information
 - Answer latest question(s)
 - Fact-check latest claim(s)
-- Suggest relevant references
-- Mediate disagreement
-- Steelman each side
-- Suggest common ground
-- Suggest compromise
-- Suggest solutions
-- Suggest next steps
+- Suggest learning references
+- Summarize the SOTA literature
 - Summarize conversation
-- List action items
 - Show transcript
-- Judge/audit/referee transcript
-- Join conversation as referee
+
+### Conflict Resolution
+- Steelman each side
+- Mediate disagreement
+- Suggest compromise
+- Identify common ground
+- Audit transcript for fallacies
+- Audit transcript for incivility
+- Join conversation as mediator
 - Join conversation on my side
 - Join conversation on right side
+
+### Problem Solving
+- List action items
+- Suggest solutions
+- Suggest next steps
 
 ## Core Components
 
