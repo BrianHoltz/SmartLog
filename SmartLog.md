@@ -21,23 +21,28 @@ A passive, mostly-silent AI that:
 - Answer latest question(s)
 - Fact-check latest claim(s)
 - Suggest learning references
-- Summarize the SOTA literature
+- Summarize expert consensus/debate
 - Summarize conversation
+- Show conversation stats
 - Show transcript
 
-### Conflict Resolution
+### Conflict Management
 - Steelman each side
-- Mediate disagreement
 - Suggest compromise
-- Identify common ground
-- Audit transcript for fallacies
-- Audit transcript for incivility
-- Join conversation as mediator
-- Join conversation on my side
-- Join conversation on right side
+- Audit transcript
+  - fallacies
+  - incivility
+- Chime in as
+  - mediator
+  - neutral expert
+  - geolibertarian humanist
+  - conspiracy theorist
+  - progressive
+  - conservative
+  - famous person: ...
 
 ### Problem Solving
-- List action items
+- Identify action items
 - Suggest solutions
 - Suggest next steps
 
@@ -46,20 +51,18 @@ A passive, mostly-silent AI that:
 ### Audio Capture
 - Always-on microphone via background audio mode.
 - Optional **VAD (Voice Activity Detection)** to reduce processing cost.
-- Audio stored in a **ring buffer** (e.g., keeping last 1–5 minutes of raw audio).
+- Audio stored in a **ring buffer** (e.g., keeping last 10 minutes of raw audio).
 
 ### Speech-to-Text (STT)
-- Runs every 5–30 seconds on-device for privacy and cost savings.
+- Runs every 60 seconds on-device for privacy and cost savings.
 - Options:
   - **Whisper tiny** (quantized)
   - Platform-native STT (iOS / Android)
 - Produces timestamped transcripts and chunk metadata.
 
 ### Transcript Management
-- Stores **last N minutes** of text (rolling window).
-- Maintains optional **longer-term summary**:
-  - Updated every 1–3 minutes.
-  - Helps maintain context without large token usage.
+- Keeps a transcript of the current hour and the previous hour.
+- When dropping an hour transcript, stores a summary with start/stop timestamps
 
 ### Trigger System
 Two trigger types:
@@ -69,7 +72,8 @@ Two trigger types:
    - Extremely low power and runs offline
 
 Trigger event causes:
-- Pulling recent transcript.
+- Updating current hour's transcript.
+- Pulling previous hour's transcript.
 - Pulling summary state.
 - Sending to LLM with a **context-weighted prompt**.
 
@@ -79,14 +83,14 @@ Prompt structure example:
 ```
 You have been silently observing a conversation.
 
-Here is your current summary of ongoing context:
-[SUMMARY_STATE]
+Here is a summary of today's previous conversations:
+[SUMMARY]
 
-Here is the verbatim transcript of the last few minutes:
+Here is the verbatim transcript of the last 60-120 minutes:
 [RECENT_TRANSCRIPT]
 
 The user has just triggered you to respond.
-Prioritize the most recent conversation.
+Prioritize the most recent part of the conversation.
 Be brief, accurate, grounded only in available text.
 ```
 
