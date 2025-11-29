@@ -94,16 +94,9 @@ Prioritize the most recent part of the conversation.
 Be brief, accurate, grounded only in available text.
 ```
 
-Possible response modes (optional):
-- Summary
-- Analysis
-- Advice
-- Devil’s advocate
-- Fact checking
-
-### Text-to-Speech (Optional)
-- Only triggered after user explicitly requests AI output.
-- Keeps the system “mostly silent.”
+### Output Modes
+- Text
+- Speech
 
 ### Privacy & Consent
 - Persistent indicator (e.g., “Listening”)
