@@ -17,6 +17,9 @@ A passive, mostly-silent AI that:
 
 ## Actions
 
+- Add custom action prompts
+- Assign hardware/software buttons to favorite actions
+
 ### Information
 - Answer latest question(s)
 - Fact-check latest claim(s)
@@ -39,7 +42,7 @@ A passive, mostly-silent AI that:
   - conspiracy theorist
   - progressive
   - conservative
-  - famous person: ...
+  - famous person: WWJD, etc
 
 ### Problem Solving
 - Identify action items
