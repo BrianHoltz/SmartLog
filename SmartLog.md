@@ -65,7 +65,7 @@ A passive, mostly-silent AI that:
 
 ### Transcript Management
 - Keeps a transcript of the current hour and the previous hour.
-- When dropping an hour transcript, stores a summary with start/stop timestamps
+- When dropping an hour transcript, stores a summary with start/stop timestamps, GPS coordinates 
 
 ### Trigger System
 Two trigger types:
