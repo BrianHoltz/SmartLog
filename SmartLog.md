@@ -49,6 +49,34 @@ A passive, mostly-silent AI that:
 - Suggest solutions
 - Suggest next steps
 
+## Recordings Screen
+
+- Recordings
+  - Name
+  - datetime
+  - place name, distance+bearing
+  - duration, audio mins/size, words
+  - summary? tags? speakers? 
+  - N Actions: ...
+- File
+  - New
+  - Rename
+- View
+- Edit
+  - place name
+  - summary
+  - transcript
+- Toolbar
+- UX
+  - swipe left, right
+  - select
+  - right click
+
+## Recording
+
+- Skip to next action 
+- outline
+
 ## Core Components
 
 ### Audio Capture
